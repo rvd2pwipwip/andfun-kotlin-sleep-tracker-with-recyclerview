@@ -16,6 +16,7 @@
 
 package com.example.android.trackmysleepquality.sleeptracker
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,19 +40,14 @@ class SleepNightAdapter : RecyclerView.Adapter<SleepNightAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = data[position]
-
         holder.bind(item)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val view = layoutInflater
-                .inflate(R.layout.list_item_sleep_night, parent, false)
-
-        return ViewHolder(view)
+        return ViewHolder.from(parent)
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    class ViewHolder private constructor(itemView: View) : RecyclerView.ViewHolder(itemView){
         // TODO (01) Refactor the logic for creating the ViewHolder into a function called from().
 
         // TODO (02) Make the from() function into a companion object.
@@ -77,6 +73,22 @@ class SleepNightAdapter : RecyclerView.Adapter<SleepNightAdapter.ViewHolder>() {
                 5 -> R.drawable.ic_sleep_5
                 else -> R.drawable.ic_sleep_active
             })
+
+            if (item.sleepQuality <= 1) {
+                quality.setTextColor(Color.RED) // red
+            } else {
+                // reset
+                quality.setTextColor(Color.BLACK) // black
+            }
+        }
+
+        companion object {
+            fun from(parent: ViewGroup): ViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val view = layoutInflater
+                        .inflate(R.layout.list_item_sleep_night, parent, false)
+                return ViewHolder(view)
+            }
         }
     }
 
