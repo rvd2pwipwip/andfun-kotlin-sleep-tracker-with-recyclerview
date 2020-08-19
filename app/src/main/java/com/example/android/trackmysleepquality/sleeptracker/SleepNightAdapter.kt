@@ -37,7 +37,7 @@ class SleepNightAdapter : ListAdapter<SleepNight,
 
     // TODO (04) Delete the data field and getItemCount() function.
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         // TODO (05) Replace data[position] with getItem().
         val item = getItem(position)
@@ -45,8 +45,8 @@ class SleepNightAdapter : ListAdapter<SleepNight,
         holder.bind(item)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return RecyclerView.ViewHolder.from(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder.from(parent)
     }
 
     class ViewHolder private constructor (itemView: View) : RecyclerView.ViewHolder(itemView){
